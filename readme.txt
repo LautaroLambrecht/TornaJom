@@ -1,0 +1,1 @@
+Para las imagenes usar 450x135
