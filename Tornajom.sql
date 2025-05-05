@@ -26,7 +26,8 @@ CREATE TABLE trabajo (
     id_publicacion INT,
     id_realizacion INT,
     zona VARCHAR(100),
-    especialidad VARCHAR(100),
+    id_especialidad VARCHAR(100),
+    FOREIGN KEY (id_especialidad) REFERENCES tipodetrabajo(id),
     FOREIGN KEY (id_publicacion) REFERENCES usuario(id),
     FOREIGN KEY (id_realizacion) REFERENCES usuario(id)
 );
