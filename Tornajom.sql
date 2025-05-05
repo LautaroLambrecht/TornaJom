@@ -20,7 +20,7 @@ CREATE TABLE tipodetrabajo (
 
 CREATE TABLE trabajo (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    estado ENUM('pendiente', 'en_proceso', 'completado', 'cancelado') DEFAULT 'pendiente',
+    estado ENUM('pendiente', 'completado') DEFAULT 'pendiente',
     titulo VARCHAR(255) NOT NULL,
     descripcion TEXT,
     id_publicacion INT,
