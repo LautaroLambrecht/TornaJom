@@ -19,7 +19,7 @@
     <title>TornaJom</title>
 </head>
 <body>
-    <header style="background-color:#74ACDF; width: 100%; height:120px"></header>
+    <header></header>
     <?php $modelo->drawAllWorks();  
     
 
