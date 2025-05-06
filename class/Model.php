@@ -25,6 +25,12 @@
             }
         }
         
+
+        public function updateWorks($id, $estado, $titulo, $descripcion, $id_publicacion, $id_realizacion, $zona, $especialidad){
+            $sql= "update trabajo set titulo='$titulo', estado='$estado', descr$descripcion='$descripcion', id_publicacion = '$id_publicacion', id_realizacion='$id_realizacion', zona='$zona', especialidad = '$especialidad' where id='$id'";
+            $this->conn->query($sql);
+            return $updatWoks;
+        }
     }
 
 ?>
