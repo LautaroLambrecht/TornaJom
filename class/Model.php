@@ -31,9 +31,13 @@
                         <input type='hidden' name='id_realizacion' value='".$row['id_realizacion']."'>
                         <input type='hidden' name='zona' value='".$row['zona']."'>
                         <input type='hidden' name='id_especialidad' value='".$row['id_especialidad']."'>
-                        <button type='submit' style='background-color: #74ACDF; color: white; font-weight: 600; border: none; transition: background-color 0.3s ease; cursor: pointer; font-weight: 60; font-size: 1rem;border-radius: 0.5rem;padding: 0.45rem 1.5rem;width: 160px; height:30px'>MODIFICAR</button>
+                        <button type='submit' >MODIFICAR</button>
                         </form>
-                    </div>";
+                        <form action='detalles.php' method='get'>
+                                <input type='hidden' name='id' value='".$row['id']."'>
+                                <button type='submit'>Consultar</button>
+                        </form>
+                        </div>";
                     $contador++;
                     if ($contador % 2 == 0){
                         echo "</div>";
@@ -50,6 +54,12 @@
             $sql= "update trabajo set titulo='$titulo', estado='$estado', descripcion='$descripcion', zona='$zona', id_especialidad = '$id_especialidad' where id='$id'";
             $this->conn->query($sql);
             
+        }
+
+        public function getWorksId($id){
+            $sql = "SELECT * FROM trabajo WHERE id=$id";
+            $stmt = $this->conn->query($sql);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
     }
 
