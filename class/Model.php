@@ -37,6 +37,10 @@
                                 <input type='hidden' name='id' value='".$row['id']."'>
                                 <button type='submit'>Consultar</button>
                         </form>
+                        <form method='POST' action='updateEstado.php'>
+                        <input type='hidden' name='id' value='" . $row['id'] . "'>
+                        <input type='submit' value='Marcar como completado'>
+                        </form>
                         </div>";
                     $contador++;
                     if ($contador % 2 == 0){
@@ -61,6 +65,11 @@
             $stmt = $this->conn->query($sql);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
+        public function updateEstado($id, $estado) { 
+            $sql = "UPDATE trabajo SET estado='$estado' WHERE id='$id'";
+            $this->conn->query($sql); 
+        }
+        
     }
 
 ?>
