@@ -22,7 +22,7 @@
     <header></header>
     <main>
         <?php 
-        $modelo->drawAllWorks();    
+        $modelo->drawAllWorks();
         ?>
     </main>
 </body>
