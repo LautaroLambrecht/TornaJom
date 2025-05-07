@@ -20,8 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modificar'])){
 </head>
 <body>
 <form method="post">
-    <label for="id">ID: </label>
-    <input type="text" name="id" value="<?php echo $_POST['id'];?>" readonly>
 
     <label for="titulo">Titulo</label>
     <input type="text" name="titulo" value="<?php echo $_POST['titulo'];?>">

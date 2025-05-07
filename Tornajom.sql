@@ -26,7 +26,7 @@ CREATE TABLE trabajo (
     id_publicacion INT,
     id_realizacion INT,
     zona VARCHAR(100),
-    id_especialidad VARCHAR(100),
+    id_especialidad INT,
     FOREIGN KEY (id_especialidad) REFERENCES tipodetrabajo(id),
     FOREIGN KEY (id_publicacion) REFERENCES usuario(id),
     FOREIGN KEY (id_realizacion) REFERENCES usuario(id)
@@ -53,10 +53,6 @@ INSERT INTO tipodetrabajo (descripcion) VALUES
 ('Fontanería'),
 ('Jardinería');
 
-INSERT INTO trabajo (estado, titulo, descripcion, id_publicacion, id_realizacion, zona, especialidad) VALUES
-('pendiente', 'Pintar habitación', 'Se necesita pintar una habitación de 20m2', 1, NULL, 'Valencia', 'Pintura'),
-('completado', 'Reparar enchufe', 'Revisión y reparación de enchufe quemado', 2, 3, 'Madrid', 'Electricidad');
-
-INSERT INTO resena (estrellas, descripcion, id_usuario, tipo) VALUES
-(5, 'Muy buen trabajo, puntual y limpio.', 3, 'trabajador'),
-(4, 'Buena comunicación, aunque se retrasó un poco.', 2, 'demandante');
+INSERT INTO trabajo (estado, titulo, descripcion, id_publicacion, id_realizacion, zona, id_especialidad) VALUES
+('pendiente', 'Pintar habitación', 'Se necesita pintar una habitación de 20m2', 1, NULL, 'Valencia', 1),
+('completado', 'Reparar enchufe', 'Revisión y reparación de enchufe quemado', 2, 3, 'Madrid', 2);
