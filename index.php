@@ -20,9 +20,10 @@
 </head>
 <body>
     <header></header>
-    <?php 
-    $modelo->drawAllWorks();  
-     
-?>
+    <main>
+        <?php 
+        $modelo->drawAllWorks();    
+        ?>
+    </main>
 </body>
 </html>
