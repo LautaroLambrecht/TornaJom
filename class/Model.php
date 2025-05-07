@@ -18,8 +18,20 @@
                     if ($contador % 2 == 0){
                         echo "<div class='trabajoPares'>";
                     }
-                    echo "<div class='trabajo'>
-                        <img src='img\Electricista.jpg'>
+                        echo "<div class='trabajo'>";
+                        if ($row['id_especialidad'] == 2){
+                            echo "<img src='img\Electricista.jpg'>";
+                        }
+                        elseif ($row['id_especialidad'] == 1){
+                            echo "<img src='img\Pintura.png'>";
+                        }
+                        elseif ($row['id_especialidad'] == 3){
+                            echo "<img src='img\Fontaneria.jpg'>";
+                        }
+                        elseif ($row['id_especialidad'] == 4){
+                            echo "<img src='img\Jardineria.png'>";
+                        }
+                        echo "
                         <h1>".$row['titulo']."</h1>
                         <p>".$row['descripcion']."</p>
                         <form action='update.php' method='POST'>

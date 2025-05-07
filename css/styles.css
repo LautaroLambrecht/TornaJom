@@ -9,10 +9,17 @@ header{
     height: 12%;
     position: fixed;
     top: 0;
+    display: flex;
+    justify-content: center;
 }
 
 main{
     margin-top: 7%;
+}
+
+.logo{
+    width: 10%;
+    height: auto;
 }
 
 .trabajo{
@@ -57,4 +64,12 @@ div h1, div p {
     flex-direction:row; 
     gap:50px; 
     justify-content:center
+}
+
+.boton-header{
+    top: 13px;
+    position: absolute;
+    right: 20px;
+    width: 32px;
+    height: 26px;
 }
