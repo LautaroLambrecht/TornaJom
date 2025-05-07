@@ -9,7 +9,8 @@ CREATE TABLE usuario (
     apellido VARCHAR(100) NOT NULL,
     movil VARCHAR(20),
     direccion VARCHAR(255),
-    creditos DECIMAL(10,2) DEFAULT 0.00
+    creditos DECIMAL(10,2) DEFAULT 0.00,
+    contrasena VARCHAR(255) NOT NULL
 );
 
 
