@@ -1,6 +1,7 @@
 <?php 
 
-    require_once "Conection.php";
+    require_once "autoloader.php";
+    require_once "autoloaderPages.php";
 
     class Model extends Conection{
 
@@ -34,7 +35,7 @@
                         echo "
                         <h1>".$row['titulo']."</h1>
                         <p>".$row['descripcion']."</p>
-                        <form action='update.php' method='POST'>
+                        <form action='pages/update.php' method='POST'>
                         <input type='hidden' name='id' value='".$row['id']."'> 
                         <input type='hidden' name='titulo' value='".$row['titulo']."'>
                         <input type='hidden' name='descripcion' value='".$row['descripcion']."'>
