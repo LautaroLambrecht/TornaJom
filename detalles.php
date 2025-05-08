@@ -1,10 +1,14 @@
 <?php
+<<<<<<< HEAD:pages/detalles.php
+    require_once "../autoloader.php";
+=======
 
     session_start();
 
     include_once "autoloader.php";
 
     $usuario_id = $_SESSION['usuario_id'] ?? null;
+>>>>>>> refs/remotes/origin/main:detalles.php
 
     $detalles = new Model();
     if(isset($_GET['id'])){
