@@ -75,6 +75,6 @@ div h1, div p {
     height: 26px;
 }
 
-.offcanvas.offcanvas-end{
-    width: 23%;
+a {
+    text-decoration: none;
 }

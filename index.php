@@ -5,6 +5,7 @@ require_once "autoloader.php";
 $modelo = new Model();
 
 $usuario_id = $_SESSION['usuario_id'] ?? null;
+$usuario_id = 1;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modificar'])) {
     if (isset($_POST['estado'], $_POST['titulo'], $_POST['descripcion'], $_POST['id_publicacion'],
@@ -49,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modificar'])) {
                         echo "<h2>Hola, click aqui para registrarte o iniciar sesion!</h2>";
                     }
                     else{
-                        echo "<h2>Hola, $modelo->getUsuarioID($usuario_id);</h2>";
+                        echo "<p>Hola, ".$modelo->getUsuarioID($usuario_id)."</p>";
                     }
 
                 ?>
@@ -57,7 +58,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modificar'])) {
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            ...
+            <?php
+
+                    if ($usuario_id !== null){
+                        echo "
+                            <a href=''><p>Ver mi perfil</p></a>
+                            <a href=''><p>Crear Trabajo</p></a>
+                            <a href=''><p>Mis trabajos publicados</p></a>
+                            <a href=''><p>Mis trabajos pendientes</p></a>
+                            <a style='position:absolute; bottom:0;' href=''><p>Cerrar sesion</p></a>";
+                    }
+            
+            ?>
         </div>
         </div>
         </div>
