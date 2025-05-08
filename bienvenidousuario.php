@@ -8,6 +8,7 @@ if (!isset($_SESSION['usuario'])) {
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/x-icon" href="img\LogoMinimalista.png" style="border: radius 5px;">
     <title>Bienvenido</title>
 </head>
 <body>
