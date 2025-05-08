@@ -1,5 +1,6 @@
 body{
     margin: 0;
+    background-color: #f0f3f4 ;
 }
 
 header{
@@ -72,6 +73,10 @@ div h1, div p {
     right: 20px;
     width: 32px;
     height: 26px;
+}
+
+.offcanvas.offcanvas-end{
+    width: 23%;
 }
 
 .pefil{ 

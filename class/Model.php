@@ -1,7 +1,7 @@
 <?php 
 
-    require_once "autoloader.php";
-    require_once "autoloaderPages.php";
+    /*require_once "../autoloader.php";
+    require_once "../autoloaderPages.php";*/
 
     class Model extends Conection{
 
@@ -35,7 +35,7 @@
                         echo "
                         <h1>".$row['titulo']."</h1>
                         <p>".$row['descripcion']."</p>
-                        <form action='pages/update.php' method='POST'>
+                        <form action='update.php' method='POST'>
                         <input type='hidden' name='id' value='".$row['id']."'> 
                         <input type='hidden' name='titulo' value='".$row['titulo']."'>
                         <input type='hidden' name='descripcion' value='".$row['descripcion']."'>
@@ -67,7 +67,6 @@
                 }
             }
         }
-        
 
         public function updateWorks($id, $estado, $titulo, $descripcion, $zona, $id_especialidad){
             $sql= "update trabajo set titulo='$titulo', estado='$estado', descripcion='$descripcion', zona='$zona', id_especialidad = '$id_especialidad' where id='$id'";
@@ -85,6 +84,22 @@
             $this->conn->query($sql); 
         }
         
+        public function getUsuarioID($id){
+            $sql = "SELECT nombre FROM usuario where id = $id";
+            $stmt = $this->conn->query($sql);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        
+        public function createWorks( $titulo, $descripcion,$zona, $id_especialidad){
+            $sql = "INSERT INTO trabajo (titulo, descripcion, zona , id_especialidad)  values
+             ('$titulo', '$descripcion', '$zona', '$id_especialidad')";
+             $this->conn->query($sql);
+        }
+        public function createUser($nombre,$apellido,$movil,$direccion, $contrasena ){
+            $sql = "INSERT INTO usuario (nombre, apellido, movil, direccion, creditos, contrasena) values 
+            ('$nombre', '$apellido', '$movil', '$direccion', '10','$contrasena')";
+            $this->conn->query($sql);
+        }
     }
 
 ?>
