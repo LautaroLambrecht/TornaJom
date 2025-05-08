@@ -85,9 +85,9 @@
         }
         
         public function getUsuarioID($id){
-            $sql = "SELECT nombre FROM usuario where id = $id";
+            $sql = "SELECT nombre as nombre FROM usuario where id = $id";
             $stmt = $this->conn->query($sql);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC)['nombre'];
         }
         
         public function createWorks( $titulo, $descripcion,$zona, $id_especialidad){
