@@ -1,6 +1,7 @@
 <?php 
 
-    require_once "Conection.php";
+    require_once "autoloader.php";
+    require_once "autoloaderPages.php";
 
     class Model extends Conection{
 
@@ -16,13 +17,25 @@
             if ($result->rowCount() > 0){
                 while ($row = $result->fetch(PDO::FETCH_ASSOC)){
                     if ($contador % 2 == 0){
-                        echo "<div style='display:flex; flex-direction:row; gap:50px; justify-content:center'>";
+                        echo "<div class='trabajoPares'>";
                     }
-                    echo "<div class='trabajo' style='width:40%; height:340px';>
-                        <img src='img\Electricista.jpg' style='justify-content:center; width:100%;'>
-                        <h1 style='font-size:15px;width:100%;'>".$row['titulo']."</h1>
+                        echo "<div class='trabajo'>";
+                        if ($row['id_especialidad'] == 2){
+                            echo "<img src='img\Electricista.jpg'>";
+                        }
+                        elseif ($row['id_especialidad'] == 1){
+                            echo "<img src='img\Pintura.png'>";
+                        }
+                        elseif ($row['id_especialidad'] == 3){
+                            echo "<img src='img\Fontaneria.jpg'>";
+                        }
+                        elseif ($row['id_especialidad'] == 4){
+                            echo "<img src='img\Jardineria.png'>";
+                        }
+                        echo "
+                        <h1>".$row['titulo']."</h1>
                         <p>".$row['descripcion']."</p>
-                        <form action='update.php' method='POST'>
+                        <form action='pages/update.php' method='POST'>
                         <input type='hidden' name='id' value='".$row['id']."'> 
                         <input type='hidden' name='titulo' value='".$row['titulo']."'>
                         <input type='hidden' name='descripcion' value='".$row['descripcion']."'>
@@ -35,7 +48,13 @@
                         </form>
                         <form action='detalles.php' method='get'>
                                 <input type='hidden' name='id' value='".$row['id']."'>
-                                <button type='submit'>Consultar</button>
+                                <div class='consultor'>
+                                    <button type='submit'>Consultar</button>
+                                </div>
+                        </form>
+                        <form method='POST' action='updateEstado.php'>
+                        <input type='hidden' name='id' value='" . $row['id'] . "'>
+                        <input type='submit' value='Marcar como completado'>
                         </form>
                         </div>";
                     $contador++;
@@ -61,6 +80,11 @@
             $stmt = $this->conn->query($sql);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
+        public function updateEstado($id, $estado) { 
+            $sql = "UPDATE trabajo SET estado='$estado' WHERE id='$id'";
+            $this->conn->query($sql); 
+        }
+        
     }
 
 ?>
