@@ -1,5 +1,5 @@
 <?php
-    require_once "autoloader.php";
+    require_once "../autoloader.php";
 
     $detalles = new Model();
     if(isset($_GET['id'])){
