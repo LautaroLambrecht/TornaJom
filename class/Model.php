@@ -1,7 +1,7 @@
 <?php 
 
-    require_once "autoloader.php";
-    require_once "autoloaderPages.php";
+    /*require_once "../autoloader.php";
+    require_once "../autoloaderPages.php";*/
 
     class Model extends Conection{
 
@@ -67,7 +67,6 @@
                 }
             }
         }
-        
 
         public function updateWorks($id, $estado, $titulo, $descripcion, $zona, $id_especialidad){
             $sql= "update trabajo set titulo='$titulo', estado='$estado', descripcion='$descripcion', zona='$zona', id_especialidad = '$id_especialidad' where id='$id'";
@@ -85,6 +84,11 @@
             $this->conn->query($sql); 
         }
         
+        public function getUsuarioID($id){
+            $sql = "SELECT nombre FROM usuario where id = $id";
+            $stmt = $this->conn->query($sql);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
     }
 
 ?>
