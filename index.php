@@ -7,7 +7,16 @@
             $modelo->updateWorks($_POST['id'], $_POST['estado'], $_POST['titulo'], $_POST['descripcion'], $_POST['zona'], $_POST['id_especialidad']);
     }
     }
-    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['movil']) && isset($_POST['direccion']) && isset($_POST['creditos']) && isset($_POST['contrasena'])){
+            $modelo->createUser(($_POST['nombre']) ,($_POST['apellido']) ,($_POST['movil']) ,($_POST['direccion']),($_POST['creditos']),($_POST['contrasena']));
+    }
+    }
+    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if ( isset($_POST['titulo']) && isset($_POST['descripcion']) && isset($_POST['zona'])  && isset($_POST['id_especialidad'])){
+            $modelo->createWorks(($_POST['titulo']) ,($_POST['descripcion']) ,($_POST['zona']),($_POST['id_especialidad']));
+    }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -43,5 +52,7 @@
         $modelo->drawAllWorks();
         ?>
     </main>
+    <td> <button><a href='registrarse.php'>registrarse</a></button></td>
+    <td> <button><a href='createWorks.php'>crear nuevo trabajo</a></button></td>
 </body>
 </html>

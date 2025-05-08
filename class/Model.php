@@ -83,8 +83,17 @@
         public function updateEstado($id, $estado) { 
             $sql = "UPDATE trabajo SET estado='$estado' WHERE id='$id'";
             $this->conn->query($sql); 
+        }   
+        public function createWorks( $titulo, $descripcion,$zona, $id_especialidad){
+            $sql = "INSERT INTO trabajo (titulo, descripcion, zona , id_especialidad)  values
+             ('$titulo', '$descripcion', '$zona', '$id_especialidad')";
+             $this->conn->query($sql);
         }
-        
+        public function createUser($nombre,$apellido,$movil,$direccion, $contrasena ){
+            $sql = "INSERT INTO usuario (nombre, apellido, movil, direccion, creditos, contrasena) values 
+            ('$nombre', '$apellido', '$movil', '$direccion', '10','$contrasena')";
+            $this->conn->query($sql);
+        }
     }
 
 ?>
