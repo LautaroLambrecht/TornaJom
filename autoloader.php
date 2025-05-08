@@ -1,7 +1,8 @@
 <?php
 
 function autocargador($clase) {
-    require_once 'class/' . $clase . '.php';
+    $route = __DIR__ . "/class/" . $clase . ".php";
+    require_once $route;
 }
 
 spl_autoload_register('autocargador');
