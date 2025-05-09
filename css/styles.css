@@ -67,6 +67,11 @@ div h1, div p {
     justify-content:center
 }
 
+.trabajoPares.ultimo{
+    display: flex;
+    justify-content: start;
+}
+
 .boton-header{
     top: 13px;
     position: absolute;

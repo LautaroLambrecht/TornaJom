@@ -11,13 +11,45 @@
             return $result;
         }
 
+        public function getPaginatedTask($limit, $offset){
+            $sql = "SELECT * FROM trabajo limit $limit OFFSET $offset ";
+            return $this->conn->query($sql);
+       }
+       
+       public function showPaginator($limit, $offset){
+        $output = [];
+        $result = $this->getPaginatedTask($limit, $offset);
+        if($result->rowCount() > 0){
+            while($row = $result->fetch(PDO::FETCH_ASSOC)){
+                $output[] = $row;
+            }
+        }else{
+            $output[] = "sin resultado"; 
+        } return $output;
+        }
+        
+        public function countTrabajo(){
+            $sql= "select count(*) as total from trabajo";
+            $stmt = $this->conn->query($sql);
+            return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+        }
+
         public function drawAllWorks(){
             $result = $this->getAllWorks();
             $contador = 0;
+            $total = $this->countTrabajo();
             if ($result->rowCount() > 0){
                 while ($row = $result->fetch(PDO::FETCH_ASSOC)){
                     if ($contador % 2 == 0){
-                        echo "<div class='trabajoPares'>";
+                        if ($total % 2 == 0){
+                            echo "<div class='trabajoPares'>";
+                        }
+                        if ($total % 2 != 0 && $contador == $total - 1){
+                            echo "<div class='trabajoPares ultimo'>";
+                        }
+                        else{
+                            echo "<div class='trabajoPares'>";
+                        }
                     }
                         echo "<div class='trabajo'>";
                         if ($row['id_especialidad'] == 2){
@@ -100,6 +132,7 @@
             ('$nombre', '$apellido', '$movil', '$direccion', '10','$contrasena')";
             $this->conn->query($sql);
         }
+        
     }
 
 ?>

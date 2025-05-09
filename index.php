@@ -7,10 +7,10 @@ $modelo = new Model();
 $usuario_id = $_SESSION['usuario_id'] ?? null;
 $usuario_id = 1;
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modificar'])) {
-    if (isset($_POST['estado'], $_POST['titulo'], $_POST['descripcion'], $_POST['id_publicacion'],
-            $_POST['id_realizacion'], $_POST['zona'], $_POST['id_especialidad'])) {
-        $modelo->updateWorks(
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['modificar']) && isset($_POST['estado']) && $_POST['titulo'] && $_POST['descripcion'] && $_POST['id_publicacion'] &&
+            $_POST['id_realizacion'] && $_POST['zona'] && $_POST['id_especialidad']) {
+            $modelo->updateWorks(
             $_POST['id'], 
             $_POST['estado'], 
             $_POST['titulo'], 
@@ -19,17 +19,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modificar'])) {
             $_POST['id_especialidad']
         );
     }
+    if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['movil']) && isset($_POST['direccion']) && isset($_POST['creditos']) && isset($_POST['contrasena'])){
+        $modelo->createUser(($_POST['nombre']) ,($_POST['apellido']) ,($_POST['movil']) ,($_POST['direccion']),($_POST['creditos']),($_POST['contrasena']));
+    }
+    if ( isset($_POST['titulo']) && isset($_POST['descripcion']) && isset($_POST['zona'])  && isset($_POST['id_especialidad'])){
+        $modelo->createWorks(($_POST['titulo']) ,($_POST['descripcion']) ,($_POST['zona']),($_POST['id_especialidad']));
 }
-    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-        if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['movil']) && isset($_POST['direccion']) && isset($_POST['creditos']) && isset($_POST['contrasena'])){
-            $modelo->createUser(($_POST['nombre']) ,($_POST['apellido']) ,($_POST['movil']) ,($_POST['direccion']),($_POST['creditos']),($_POST['contrasena']));
-    }
-    }
-    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-        if ( isset($_POST['titulo']) && isset($_POST['descripcion']) && isset($_POST['zona'])  && isset($_POST['id_especialidad'])){
-            $modelo->createWorks(($_POST['titulo']) ,($_POST['descripcion']) ,($_POST['zona']),($_POST['id_especialidad']));
-    }
-    }
+}
+    $trabajoPorPagina = 4;
+    $pagina = isset($_GET["pagina"])?(int)$_GET['pagina']:1;
+    $offset = ($pagina - 1 ) * $trabajoPorPagina;
+    $totalTrabajo = $modelo->countTrabajo();
+    $totalPaginas = ceil($totalTrabajo / $trabajoPorPagina);
+    $tareas = $modelo->showPaginator($trabajoPorPagina,$offset);
 ?>
 
 
@@ -57,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modificar'])) {
                 <?php
 
                     if ($usuario_id === null ){
-                        echo "<h2>Hola, click aqui para registrarte o iniciar sesion!</h2>";
+                        echo "<h2>Hola, <a href='registrarse.php'>registrate</a> o iniciar sesion!</h2>";
                     }
                     else{
                         echo "<p>Hola, ".$modelo->getUsuarioID($usuario_id)."</p>";
@@ -73,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modificar'])) {
                     if ($usuario_id !== null){
                         echo "
                             <a href=''><p>Ver mi perfil</p></a>
-                            <a href=''><p>Crear Trabajo</p></a>
+                            <a href='createWorks.php'><p>Crear Trabajo</p></a>
                             <a href=''><p>Mis trabajos publicados</p></a>
                             <a href=''><p>Mis trabajos pendientes</p></a>
                             <a style='position:absolute; bottom:0;' href=''><p>Cerrar sesion</p></a>";
@@ -89,7 +91,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modificar'])) {
         $modelo->drawAllWorks();
         ?>
     </main>
-    <td> <button><a href='registrarse.php'>registrarse</a></button></td>
-    <td> <button><a href='createWorks.php'>crear nuevo trabajo</a></button></td>
+    </div>        
+        <div class="pagination">
+            <?php for($i = 0; $i < $totalPaginas; $i++): 
+                $x = $i + 1;
+                $active = ($x == $pagina) ? 'active' : '';
+            ?>
+                <a class="<?= $active ?>" href="?pagina=<?= $x ?>"><?= $x ?></a>
+            <?php endfor; ?>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,14 +1,5 @@
 <?php
-<<<<<<< HEAD:pages/detalles.php
     require_once "../autoloader.php";
-=======
-
-    session_start();
-
-    include_once "autoloader.php";
-
-    $usuario_id = $_SESSION['usuario_id'] ?? null;
->>>>>>> refs/remotes/origin/main:detalles.php
 
     $detalles = new Model();
     if(isset($_GET['id'])){
@@ -22,6 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="img\LogoMinimalista.png" style="border: radius 5px;">
     <title>Document</title>
 </head>
 <style>
