@@ -119,10 +119,10 @@
             return $stmt->fetch(PDO::FETCH_ASSOC)['nombre'];
         }
         
-        public function createWorks( $titulo, $descripcion,$zona, $id_especialidad){
+        public function createWorks($titulo, $descripcion, $zona, $id_especialidad){
             $sql = "INSERT INTO trabajo (titulo, descripcion, zona , id_especialidad)  values
-             ('$titulo', '$descripcion', '$zona', '$id_especialidad')";
-             $this->conn->query($sql);
+            ('$titulo', '$descripcion', '$zona', $id_especialidad)";
+            $this->conn->query($sql);
         }
         public function createUser($nombre,$apellido,$movil,$direccion, $contrasena ){
             $sql = "INSERT INTO usuario (nombre, apellido, movil, direccion, creditos, contrasena) values 
