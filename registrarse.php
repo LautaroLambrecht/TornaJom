@@ -5,6 +5,12 @@
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['movil']) && isset($_POST['direccion'])  && isset($_POST['contrasena'])){
       $modelo->createUser(($_POST['nombre']) ,($_POST['apellido']) ,($_POST['movil']) ,($_POST['direccion']),($_POST['contrasena']));
+      echo "
+            <form id='postForm' action='verificarlogin.php' method='POST'>
+                <input type='hidden' name='movil' value='".$_POST['movil']."'>
+                <input type='hidden' name='contrasena' value='".$_POST['contrasena']."'>
+            </form>
+            <script>document.getElementById('postForm').submit();</script>";
     }
   }
 
