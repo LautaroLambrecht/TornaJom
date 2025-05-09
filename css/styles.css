@@ -30,6 +30,7 @@ main{
     margin-bottom: 30px;
     width: 40%;
     height: 340px;
+    overflow: hidden;
 }
 
 .trabajo img{
@@ -51,7 +52,7 @@ div h1, div p {
 }
 
 .acciones{
-    bottom: -84px;
+    top: -240px;
     position: absolute;
     right: 10px;
 }
@@ -149,8 +150,10 @@ h3.profile{
 }
 
 div.profile{
+    flex-direction: row;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    gap: 542px;
 }
 
 .trabajoClaim{
@@ -167,4 +170,45 @@ div.profile{
 .convivencia{
     display: flex;
     flex-direction: row;
+}
+
+.resenaTriple{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 4.5%;
+    justify-content: center;
+}
+
+.resena{
+    width: 20%;
+    border: 1px solid black;
+    border-radius: 0 0 10px 10px;
+    height: 150%;
+}
+
+.estrellas{
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.creadorResenas{
+    margin-top: 7%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.creadorResenas label{
+    display: flex;
+    justify-content: center;
+}
+
+textarea{
+    margin-top: 10px;
+    width: 25%;
+    height: 125px;
+    margin: 0 auto;
+
 }

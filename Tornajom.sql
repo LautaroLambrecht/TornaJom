@@ -28,18 +28,21 @@ CREATE TABLE trabajo (
     id_realizacion INT NULL,
     zona VARCHAR(100),
     id_especialidad INT,
+    paga DECIMAL(10, 2) DEFAULT 0.00,
     FOREIGN KEY (id_especialidad) REFERENCES tipodetrabajo(id),
     FOREIGN KEY (id_publicacion) REFERENCES usuario(id),
     FOREIGN KEY (id_realizacion) REFERENCES usuario(id)
 );
+
 
 CREATE TABLE resena (
     id INT AUTO_INCREMENT PRIMARY KEY,
     estrellas INT CHECK (estrellas BETWEEN 1 AND 5),
     descripcion TEXT,
     id_usuario INT,
-    tipo ENUM('trabajador', 'demandante'),
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+    id_trabajo INT,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+    FOREIGN KEY (id_trabajo) REFERENCES trabajo(id)
 );
 
 

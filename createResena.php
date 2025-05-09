@@ -9,6 +9,14 @@
     require_login();
 
     $usuario_id = $_SESSION['usuario_id'];
+
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+      if (isset($_POST['id_trabajo']) && isset($_POST['estrella']) && isset($_POST['descripcion'])  && isset($_POST['id_realizacion'])){
+        $modelo->createresenas(($_POST['estrella']) ,($_POST['descripcion']),($_POST['id_realizacion']),($_POST['id_trabajo']));
+        header("Location: index.php");
+      }
+    }  
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +28,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="icon" type="image/x-icon" href="img\LogoMinimalista.png" style="border: radius 5px;">
-    <title>Perfil de usuario</title>
+    <title>TornaJom</title> 
 </head>
 <body>
     <header>
@@ -63,19 +71,20 @@
         </div>
         </div>
     </header>
-    <div class="profile" >
-        <h3 class="profile" >Hola, <?php echo $modelo->getUsuarioID($usuario_id) ?>!</h3>
-        <p style="width: 10%; height: 10%; margin-top: 7%;">Tienes <?php echo $modelo->getCredits($usuario_id) ?> creditos</p>
-    </div>
-
-    <div style="display: flex; justify-content: center;">
-    <?php
-        
-            $modelo->drawResenas($usuario_id);
-        
-    
-    ?>
-    </div>
-
+    <form class="creadorResenas" method="POST">
+      <label for="estrella">Cuantas estrellas?</label>
+      <div style="display: flex; flex-direction: row; justify-content:center;">
+        <input type="radio" name="estrella" id="estrella5" value="5"><label for="estrella5">★</label>
+        <input type="radio" name="estrella" id="estrella4" value="4"><label for="estrella4">★</label>
+        <input type="radio" name="estrella" id="estrella3" value="3"><label for="estrella3">★</label>
+        <input type="radio" name="estrella" id="estrella2" value="2"><label for="estrella2">★</label>
+        <input type="radio" name="estrella" id="estrella1" value="1"><label for="estrella1">★</label>
+      </div>
+      <label for="descripcion">Comentanos sobre tu experiencia:</label>
+      <textarea name="descripcion"></textarea>
+      <input type="hidden" name="id_trabajo" value="<?php echo $_POST['id_trabajo'] ?>">
+      <input type="hidden" name="id_realizacion" value="<?php echo $_POST['id_realizacion'] ?>">
+      <input style="width:15%; margin: 10px auto;" type="submit" value="Enviar Reseña" class="btn btn-primary">
+    </form>
 </body>
 </html>

@@ -12,7 +12,6 @@
             $sql = "SELECT COUNT(*) FROM trabajo limit $limit OFFSET $offset ";
             $stmt = $this->conn->query($sql);
             return $stmt->fetchColumn();
-;
         }
 
         public function getPaginatedTask($limit, $offset) {
@@ -141,6 +140,18 @@
             $sql = "SELECT * FROM trabajo WHERE id=$id";
             $stmt = $this->conn->query($sql);
             return $stmt;
+        }
+
+        public function getIdRealizacion($id){
+            $sql ="SELECT id_realizacion as 'id_realizacion' FROM trabajo WHERE id = $id";
+            $stmt = $this->conn->query($sql);
+            return $stmt->fetch(PDO::FETCH_ASSOC)['id_realizacion'];
+        }
+
+        public function getPaid($id){
+            $sql = "SELECT paga as paga FROM trabajo where id = $id";
+            $stmt = $this->conn->query($sql);
+            return $stmt->fetch(PDO::FETCH_ASSOC)['paga'];
         }
 
         public function drawWorkId($id){
@@ -363,36 +374,74 @@
                 }
             }
         }
-        public function createresenas($estrellas, $descripcion, $id_usuario) {
-            $sql = "INSERT INTO resenas (estrellas, descripcion, id_usuario, tipo) VALUES ($estrellas, '$descripcion', $id_usuario, $tipo)";
-            $stmt = $this->pdo->prepare($sql);
-            return $stmt->execute([$this->estrellas, $this->descripcion, $this->id_usuario, ]);
+        public function createresenas($estrellas, $descripcion, $id_usuario, $id_trabajo) {
+            $sql = "INSERT INTO resena (estrellas, descripcion, id_usuario, id_trabajo) VALUES ($estrellas, '$descripcion', $id_usuario, $id_trabajo)";
+            $this->conn->query($sql);
         }
     
         public function readresenas($id) {
-            $sql = "SELECT * FROM resenas WHERE id = $id";
+            $sql = "SELECT * FROM resena WHERE id_usuario = $id";
             $stmt = $this->conn->query($sql);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         
-        public function drawResenas($id){
-            $result = $this->getWorksId($id);
-            if ($result->rowCount() > 0){
-                while ($row = $result->fetch(PDO::FETCH_ASSOC)){
-                    echo "<div class=''>";
-                    
-                    echo "
-                    <h1>".$row['estrellas']."</h1>
-                    <p>".$row['descripcion']."</p>
-                    <p>".$row['id_usuario']."</p>
-                    </div>";
-                }
-                
+        public function getCountReseña($id){
+            $sql = "SELECT COUNT(*) as total FROM resena where id_usuario = $id";
+            $stmt = $this->conn->query($sql);
+            return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
         }
-    }
 
-        public function addpoints($id, $creditos){
-            $
+        public function drawResenas($id){
+            $result = $this->readresenas($id);
+            $total = count($result);
+            $contador = 0;
+
+            if ($total > 0) {
+                foreach ($result as $row) {
+                    $contador = 0;
+                    foreach ($result as $row) {
+                        if ($contador % 3 == 0) {
+                            echo "<div class='resenaTriple'>";
+                        }
+
+                        $extraClass = ($total % 3 != 0 && $contador >= $total - ($total % 3)) ? " ultimo" : "";
+
+                        echo "
+                            <div style='max-width: 40%; word-break: break-word;' class='resena $extraClass'>
+                                <div class='estrellas'>";
+                                    for ($i = 0; $i < $row['estrellas']; $i++){
+                                        echo "<img style='width:10%;'src='img/star.webp'>";
+                                    }
+                        echo "</div>
+                                <p style='display:flex; justify-content:center; width:91%; max-width:91%'>".$row['descripcion']."</p>
+                            </div>
+                        ";
+
+                        if (($contador + 1) % 3 == 0 || ($contador + 1) == $total) {
+                            echo "</div>";
+                        }
+                        $contador++;
+                    }
+
+
+                    $contador++;
+
+                    if ($contador % 3 == 0 || $contador == $total) {
+                        echo "</div>";
+                    }
+                }
+            }
+        }
+
+        public function getCredits($id){
+            $sql = "SELECT creditos as creditos FROM usuario WHERE id = $id";
+            $stmt = $this->conn->query($sql);
+            return $stmt->fetch(PDO::FETCH_ASSOC)['creditos'];
+        }
+
+        public function addCredits($id, $creditos){
+            $sql = "UPDATE usuario SET creditos = creditos + $creditos WHERE id = $id";
+            $this->conn->query($sql);
         }
 }
 
