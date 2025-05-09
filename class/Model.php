@@ -360,6 +360,37 @@
                 }
             }
         }
+        public function createresenas($estrellas, $descripcion, $id_usuario) {
+            $sql = "INSERT INTO resenas (estrellas, descripcion, id_usuario, tipo) VALUES ($estrellas, '$descripcion', $id_usuario, $tipo)";
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute([$this->estrellas, $this->descripcion, $this->id_usuario, ]);
+        }
+    
+        public function readresenas($id) {
+            $sql = "SELECT * FROM resenas WHERE id = $id";
+            $stmt = $this->conn->query($sql);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        
+        public function drawresenas($id){
+            $result = $this->getWorksId($id);
+            if ($result->rowCount() > 0){
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+                    echo "<div class=''>";
+                    
+                    echo "
+                    <h1>".$row['estrellas']."</h1>
+                    <p>".$row['descripcion']."</p>
+                    <p>".$row['id_usuario']."</p>
+                    </div>";
+                }
+                
+        }
     }
+
+        public function addpoints($id, $creditos){
+            $
+        }
+}
 
 ?>
