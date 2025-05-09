@@ -41,58 +41,55 @@
             if ($result->rowCount() > 0){
                 while ($row = $result->fetch(PDO::FETCH_ASSOC)){
                     if ($contador % 2 == 0){
-                        if ($total % 2 == 0){
-                            echo "<div class='trabajoPares'>";
-                        }
-                        if ($total % 2 != 0 && $contador == $total - 1){
-                            echo "<div class='trabajoPares ultimo'>";
-                        }
-                        else{
-                            echo "<div class='trabajoPares'>";
-                        }
+                        echo "<div class='trabajoPares'>";
                     }
+                    if ($total % 2 != 0 && $contador == $total - 1){
+                         echo "<div class='trabajo ultimo'>";
+                    }
+                    else{
                         echo "<div class='trabajo'>";
-                        if ($row['id_especialidad'] == 2){
-                            echo "<img src='img\Electricista.jpg'>";
-                        }
-                        elseif ($row['id_especialidad'] == 1){
-                            echo "<img src='img\Pintura.png'>";
-                        }
-                        elseif ($row['id_especialidad'] == 3){
-                            echo "<img src='img\Fontaneria.jpg'>";
-                        }
-                        elseif ($row['id_especialidad'] == 4){
-                            echo "<img src='img\Jardineria.png'>";
-                        }
-                        echo "
-                        <h1>".$row['titulo']."</h1>
-                        <p>".$row['descripcion']."</p>
-                        <form action='update.php' method='POST'>
-                        <input type='hidden' name='id' value='".$row['id']."'> 
-                        <input type='hidden' name='titulo' value='".$row['titulo']."'>
-                        <input type='hidden' name='descripcion' value='".$row['descripcion']."'>
-                        <input type='hidden' name='estado' value='".$row['estado']."'>
-                        <input type='hidden' name='id_publicacion' value='".$row['id_publicacion']."'>
-                        <input type='hidden' name='id_realizacion' value='".$row['id_realizacion']."'>
-                        <input type='hidden' name='zona' value='".$row['zona']."'>
-                        <input type='hidden' name='id_especialidad' value='".$row['id_especialidad']."'>
-                        <button type='submit' >MODIFICAR</button>
-                        </form>
-                        <form action='detalles.php' method='get'>
-                                <input type='hidden' name='id' value='".$row['id']."'>
-                                <div class='consultor'>
-                                    <button type='submit'>Consultar</button>
-                                </div>
-                        </form>
-                        <form method='POST' action='updateEstado.php'>
-                        <input type='hidden' name='id' value='" . $row['id'] . "'>
-                        <input type='submit' value='Marcar como completado'>
-                        </form>
-                        </div>";
-                    $contador++;
-                    if ($contador % 2 == 0){
-                        echo "</div>";
                     }
+                    if ($row['id_especialidad'] == 2){
+                        echo "<img src='img\Electricista.jpg'>";
+                    }
+                    elseif ($row['id_especialidad'] == 1){
+                        echo "<img src='img\Pintura.png'>";
+                    }
+                    elseif ($row['id_especialidad'] == 3){
+                        echo "<img src='img\Fontaneria.jpg'>";
+                    }
+                    elseif ($row['id_especialidad'] == 4){
+                        echo "<img src='img\Jardineria.png'>";
+                    }
+                    echo "
+                    <h1>".$row['titulo']."</h1>
+                    <p>".$row['descripcion']."</p>
+                    <form action='update.php' method='POST'>
+                    <input type='hidden' name='id' value='".$row['id']."'> 
+                    <input type='hidden' name='titulo' value='".$row['titulo']."'>
+                    <input type='hidden' name='descripcion' value='".$row['descripcion']."'>
+                    <input type='hidden' name='estado' value='".$row['estado']."'>
+                    <input type='hidden' name='id_publicacion' value='".$row['id_publicacion']."'>
+                    <input type='hidden' name='id_realizacion' value='".$row['id_realizacion']."'>
+                    <input type='hidden' name='zona' value='".$row['zona']."'>
+                    <input type='hidden' name='id_especialidad' value='".$row['id_especialidad']."'>
+                    <button type='submit' >MODIFICAR</button>
+                    </form>
+                    <form action='detalles.php' method='get'>
+                            <input type='hidden' name='id' value='".$row['id']."'>
+                            <div class='consultor'>
+                                <button type='submit'>Consultar</button>
+                            </div>
+                    </form>
+                    <form method='POST' action='updateEstado.php'>
+                    <input type='hidden' name='id' value='" . $row['id'] . "'>
+                    <input type='submit' value='Marcar como completado'>
+                    </form>
+                    </div>";
+                $contador++;
+                if ($contador % 2 == 0){
+                    echo "</div>";
+                }
                 }
                 if ($contador % 2 != 0){
                     echo "</div>";
