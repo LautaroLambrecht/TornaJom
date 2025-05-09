@@ -5,7 +5,6 @@ require_once "autoloader.php";
 $modelo = new Model();
 
 $usuario_id = $_SESSION['usuario_id'] ?? null;
-$usuario_id = 1;
     
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['modificar']) && isset($_POST['estado']) && $_POST['titulo'] && $_POST['descripcion'] && $_POST['id_publicacion'] &&
@@ -71,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?php
 
                     if ($usuario_id === null ){
-                        echo "<h2>Hola, <a href='registrarse.php'>registrate</a> o iniciar sesion!</h2>";
+                        echo "<h2>Hola, <a href='registrarse.php'>registrate</a> o <a href='login.php'>inicia sesion</a>!</h2>";
                     }
                     else{
                         echo "<p>Hola, ".$modelo->getUsuarioID($usuario_id)."</p>";
@@ -90,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <a href='createWorks.php'><p>Crear Trabajo</p></a>
                             <a href=''><p>Mis trabajos publicados</p></a>
                             <a href=''><p>Mis trabajos pendientes</p></a>
-                            <a style='position:absolute; bottom:0;' href=''><p>Cerrar sesion</p></a>";
+                            <a style='position:absolute; bottom:0;' href='cerrarsesion.php'><p>Cerrar sesion</p></a>";
                     }
             
             ?>

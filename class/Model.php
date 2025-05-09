@@ -130,7 +130,18 @@
             $this->conn->query($sql);
         }
         
-        
+        public function verificarUsuario($movil, $contrasena){
+            $output = "";
+            $sql = "SELECT movil as movil, id as id, contrasena as pass FROM usuario where movil = $movil";
+            $stmt = $this->conn->query($sql);
+            $stmt = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($stmt['movil'] == $movil && $stmt['pass'] == $contrasena){
+                return $stmt['id'];
+            }
+            else{
+                echo "Contraseña incorrecta";
+            }
+        }
     }
 
 ?>
