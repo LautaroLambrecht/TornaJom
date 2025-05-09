@@ -1,19 +1,16 @@
 <?php
-    session_start(); 
-    require_once "autoloader.php";
 
+    session_start();
+
+    require_once "autoloader.php";
     $modelo = new Model();
 
-    $usuario_id = $_SESSION['usuario_id'] ?? null;
+    require_once "require_login.php";
+    require_login();
 
-    $trabajoPorPagina = 4;
-    $pagina = isset($_GET["pagina"])?(int)$_GET['pagina']:1;
-    $offset = ($pagina - 1 ) * $trabajoPorPagina;
-    $totalTrabajo = $modelo->countTrabajo();
-    $totalPaginas = ceil($totalTrabajo / $trabajoPorPagina);
+    $usuario_id = $_SESSION['usuario_id'];
+
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +21,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="icon" type="image/x-icon" href="img\LogoMinimalista.png" style="border: radius 5px;">
-    <title>TornaJom</title> 
+    <title>Perfil de usuario</title>
 </head>
 <body>
     <header>
@@ -40,7 +37,7 @@
                 <?php
 
                     if ($usuario_id === null ){
-                        echo "<p>Hola, <a href='registrarse.php'>registrate</a> o <a href='login.php'>inicia sesion</a>!</p>";
+                        echo "<h2>Hola, <a href='registrarse.php'>registrate</a> o <a href='login.php'>inicia sesion</a>!</h2>";
                     }
                     else{
                         echo "<p>Hola, ".$modelo->getUsuarioID($usuario_id)."</p>";
@@ -57,8 +54,6 @@
                         echo "
                             <a href='profile.php'><p>Ver mi perfil</p></a>
                             <a href='createWorks.php'><p>Crear Trabajo</p></a>
-                            <a href='trabajosPublicados.php'><p>Trabajos Publicados</p></a>
-                            <a href='trabajosPendientes.php'><p>Tus trabajos pendientes</p></a>
                             <a style='position:absolute; bottom:0;' href='cerrarsesion.php'><p>Cerrar sesion</p></a>";
                     }
             
@@ -67,31 +62,23 @@
         </div>
         </div>
     </header>
-    <main>
+    <div class="profile" >
+        <h3 class="profile" >Hola, <?php echo $modelo->getUsuarioID($usuario_id) ?>!</h3>
+    </div>
+    <div>
         <?php 
         
-        $modelo->showPaginator($trabajoPorPagina,$offset);
-
-        echo"
-        <div style='display:flex; justify-content:center; gap: 10px;'>";
-            if ($pagina > 1){
-                    echo "<a href=\"?pagina=1\"><<</a>";
-                    echo "<a href=\"?pagina=".($pagina-1)."\"><</a>";
+            $trabajos = $modelo->getWorksUser($usuario_id);
+            if (!empty($trabajos) === false){
+                echo "<p>Aun no has publicado trabajos si deseas hacerlo, <a href='createWorks.php'>pulsa aqui</a>!</p>";
             }
-
-            for($i = 0; $i < $totalPaginas; $i++){
-                $x = $i + 1;
-                $active = ($x == $pagina) ? 'active' : '';
+            else{
+                echo "
+                <p style='margin-top: 3%; display: flex; justify-content: center'>Tus trabajos publicados:</p>";
+                $modelo->drawWorksUser($usuario_id);
             }
-
-            echo "<span>Pagina $pagina de $totalPaginas</span>";
-
-                if ($pagina < $totalPaginas){
-                    echo "<a href=\"?pagina=".($pagina+1)."\">></a>";
-                    echo "<a href=\"?pagina=".$totalPaginas."\">>></a>";
-                }
-            ?>
-        </div>
-    </main>
+        
+        ?>
+    </div>
 </body>
 </html>

@@ -16,15 +16,15 @@
         }
 
         public function getPaginatedTask($limit, $offset) {
-        $sql = "SELECT * FROM trabajo LIMIT $limit OFFSET $offset";
+        $sql = "SELECT * FROM trabajo WHERE estado = 'pendiente' LIMIT $limit OFFSET $offset";
         $stmt = $this->conn->query($sql);
-        if ($stmt) {
-            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $this->cantidadResultadosPagina = count($resultados);
-            return $resultados;
-        }
+            if ($stmt) {
+                $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $this->cantidadResultadosPagina = count($resultados);
+                return $resultados;
+            }
         return [];
-}
+        }
 
        
        public function showPaginator($limit, $offset){
@@ -171,12 +171,14 @@
 
         public function updateEstado($id, $estado, $id_realizacion) {
             $id = (int)$id;
-            if ($id_realizacion === null) {
+            if ($id_realizacion === null && $estado == 'pendiente') {
                 $sql = "UPDATE trabajo SET estado = '$estado', id_realizacion = NULL WHERE id = $id";
             } 
-            else {
-                $sql = "UPDATE trabajo SET estado = '$estado', id_realizacion = $id_realizacion WHERE id = $id";
+            if  ($id_realizacion === null && $estado == 'completado'){
+                $sql = "UPDATE trabajo SET estado = '$estado' WHERE id = $id";
             }
+
+            if (!empty($id_realizacion) && $estado == 'reclamado')
             $this->conn->query($sql);
         }
         
@@ -216,7 +218,7 @@
         }
 
         public function getWorksUser($id){
-            $sql = "SELECT * FROM trabajo where id_publicacion = $id";
+            $sql = "SELECT * FROM trabajo where id_publicacion = $id AND (estado = 'pendiente' OR estado = 'reclamado')";
             $stmt = $this->conn->query($sql);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
@@ -263,7 +265,7 @@
                         </button>
                         <ul class='dropdown-menu'>
                             <li><a class='dropdown-item' href='detalles.php?id=".$row['id']."'>Consultar</a></li>
-                            <li><a class='dropdown-item' href='updateEstado.php?id=".$row['id']."'>Marca como realizado</a></li>
+                            <li><a class='dropdown-item' href='updateEstado.php?id=".$row['id']."&estado=completado'>Marca como realizado</a></li>
                             <li>
                                 <form action='update.php' method='POST' style='margin: 0; padding: 0;'>
                                     <input type='hidden' name='id' value='". $row['id']."'> 
