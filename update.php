@@ -1,12 +1,18 @@
 <?php
-require_once "autoloader.php";
-$modelo = new Model();
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modificar'])){
-    if (isset($_POST['id']) && isset($_POST['estado']) && isset($_POST['titulo'])  && isset($_POST['descripcion'])
-    && isset($_POST['zona'])&& isset($_POST['id_especialidad'])){
-        $modelo->updateWorks($_POST['id'], $_POST['estado'], $_POST['titulo'], $_POST['descripcion'], $_POST['zona'], $_POST['id_especialidad'] );
-    
-}
+
+  session_start();
+
+  require_once "require_login.php";
+  require_login();
+
+  require_once "autoloader.php";
+  $modelo = new Model();
+  if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modificar'])){
+      if (isset($_POST['id']) && isset($_POST['estado']) && isset($_POST['titulo'])  && isset($_POST['descripcion'])
+      && isset($_POST['zona'])&& isset($_POST['id_especialidad'])){
+      $modelo->updateWorks($_POST['id'], $_POST['estado'], $_POST['titulo'], $_POST['descripcion'], $_POST['zona'], $_POST['id_especialidad'] );
+      header("Location: profile.php");
+  }
 }
 
 ?>

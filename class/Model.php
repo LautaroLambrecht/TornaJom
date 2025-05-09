@@ -1,8 +1,5 @@
 <?php 
 
-    /*require_once "../autoloader.php";
-    require_once "../autoloaderPages.php";*/
-
     class Model extends Conection{
 
         public function getAllWorks(){
@@ -11,22 +8,73 @@
             return $result;
         }
 
-        public function getPaginatedTask($limit, $offset){
-            $sql = "SELECT * FROM trabajo limit $limit OFFSET $offset ";
-            return $this->conn->query($sql);
-       }
+        public function getCountPaginated($limit, $offset){
+            $sql = "SELECT COUNT(*) FROM trabajo limit $limit OFFSET $offset ";
+            $stmt = $this->conn->query($sql);
+            return $stmt->fetchColumn();
+;
+        }
+
+        public function getPaginatedTask($limit, $offset) {
+        $sql = "SELECT * FROM trabajo LIMIT $limit OFFSET $offset";
+        $stmt = $this->conn->query($sql);
+        if ($stmt) {
+            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $this->cantidadResultadosPagina = count($resultados);
+            return $resultados;
+        }
+        return [];
+}
+
        
        public function showPaginator($limit, $offset){
-        $output = [];
-        $result = $this->getPaginatedTask($limit, $offset);
-        if($result->rowCount() > 0){
-            while($row = $result->fetch(PDO::FETCH_ASSOC)){
-                $output[] = $row;
+            $result = $this->getPaginatedTask($limit, $offset);
+            $contador = 0;
+            $total = count($result);
+
+            if ($total > 0){
+                foreach ($result as $row) {
+                    if ($contador % 2 == 0){
+                        echo "<div class='trabajoPares'>";
+                    }
+
+                    if ($total % 2 != 0 && $contador == $total - 1){
+                        echo "<div class='trabajo ultimo'>";
+                    } else {
+                        echo "<div class='trabajo'>";
+                    }
+
+                    switch ($row['id_especialidad']) {
+                        case 1: echo "<img src='img/Pintura.png'>"; break;
+                        case 2: echo "<img src='img/Electricista.jpg'>"; break;
+                        case 3: echo "<img src='img/Fontaneria.jpg'>"; break;
+                        case 4: echo "<img src='img/Jardineria.png'>"; break;
+                    }
+
+                    echo "
+                        <h1>".$row['titulo']."</h1>
+                        <p>".$row['descripcion']."</p>
+                        <form action='claimWork.php' method='get'>
+                            <input type='hidden' name='id' value='".$row['id']."'>
+                            <div class='consultor'>
+                                <button type='submit'>Consultar</button>
+                            </div>
+                        </form>
+                    </div>";
+
+                    $contador++;
+
+                    if ($contador % 2 == 0){
+                        echo "</div>";
+                    }
+                }
+
+                if ($contador % 2 != 0){
+                    echo "</div>";
+                }
             }
-        }else{
-            $output[] = "sin resultado"; 
-        } return $output;
         }
+
         
         public function countTrabajo(){
             $sql= "select count(*) as total from trabajo where estado = 'pendiente'";
@@ -153,13 +201,18 @@
             $output = "";
             $sql = "SELECT movil as movil, id as id, contrasena as pass FROM usuario where movil = $movil";
             $stmt = $this->conn->query($sql);
-            $stmt = $stmt->fetch(PDO::FETCH_ASSOC);
-            if ($stmt['movil'] == $movil && $stmt['pass'] == $contrasena){
-                return $stmt['id'];
-            }
-            else{
-                echo "Contraseña incorrecta";
-            }
+            if ($stmt) {
+                $stmt = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($stmt && $stmt['movil'] == $movil && $stmt['pass'] == $contrasena) {
+                    return $stmt['id'];
+                } else {
+                    $output = "Contraseña incorrecta";
+                }
+            } else {
+            $output = "Usuario no encontrado";
+        }
+    
+    return $output;
         }
 
         public function getWorksUser($id){

@@ -10,7 +10,7 @@
 
     if (is_string($id)){
         $_SESSION['error'] = "Usuario o contraseña incorrectos.";
-        header("Location: loginusuario.php");
+        header("Location: login.php");
     }
     else{
         $_SESSION['usuario_id'] = $id;

@@ -87,45 +87,62 @@ div h1, div p {
     height: 26px;
 }
 
+.three-points{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    right: 4px;
+    top: -2px;
+}
+
 a {
     text-decoration: none;
 }
 
+a.logo {
+    display: flex;
+    justify-content: center;
+}
+
+a.logo img {
+    border-radius: 5px;
+    max-height: 80%;
+}
+
 .pefil{ 
-    
-        margin: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #e9f2fb;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e9f2fb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 
 
-    .perfil_contenido  {
-        margin-top: 100px;
-        text-align: center;
-    }
+.perfil_contenido  {
+    margin-top: 100px;
+    text-align: center;
+}
 
-    .perfil_contenido h1 {
-        color: #333;
-        font-size: 2em;
-    }
+.perfil_contenido h1 {
+    color: #333;
+    font-size: 2em;
+}
 
-    .perfil_contenido a {
-        color: #555;
-        font-size: 1.2em;
-    }
-    .botones {
-        color: #555;
-        font-size: 1.2em;
-        background-color: #555;
-        border: none;
-        margin: 20px;
-        margin-left: 10px;
-        margin-right: 10px;
-    }
+.perfil_contenido a {
+    color: #555;
+    font-size: 1.2em;
+}
+.botones {
+    color: #555;
+    font-size: 1.2em;
+    background-color: #555;
+    border: none;
+    margin: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
 
 h3.profile{
     margin-top: 7%;

@@ -11,7 +11,6 @@
     <title>TornaJom</title> 
 </head>
 <style>
-    
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background: linear-gradient(to right, #6a11cb, #2575fc);
