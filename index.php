@@ -6,11 +6,7 @@ $modelo = new Model();
 
 $usuario_id = $_SESSION['usuario_id'] ?? null;
 $usuario_id = 1;
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['modificar']) && isset($_POST['estado']) && $_POST['titulo'] && $_POST['descripcion'] && $_POST['id_publicacion'] &&
-            $_POST['id_realizacion'] && $_POST['zona'] && $_POST['id_especialidad']) {
-            $modelo->updateWorks(
+    
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['modificar']) && isset($_POST['estado']) && $_POST['titulo'] && $_POST['descripcion'] && $_POST['id_publicacion'] &&
             $_POST['id_realizacion'] && $_POST['zona'] && $_POST['id_especialidad']) {
