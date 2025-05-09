@@ -212,3 +212,13 @@ textarea{
     margin: 0 auto;
 
 }
+
+h3.paginasTrabajos{
+    margin-top: 7%;
+}
+
+div.paginasTrabajos{
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+}

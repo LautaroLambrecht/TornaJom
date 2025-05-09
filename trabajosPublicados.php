@@ -64,8 +64,8 @@
         </div>
         </div>
     </header>
-    <div class="profile" >
-        <h3 class="profile" >Hola, <?php echo $modelo->getUsuarioID($usuario_id) ?>!</h3>
+    <div class="paginasTrabajos" >
+        <h3 class="paginasTrabajos" >Hola, <?php echo $modelo->getUsuarioID($usuario_id) ?>!</h3>
     </div>
     <div>
         <?php 
