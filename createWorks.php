@@ -13,13 +13,16 @@ body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 2rem;
+  height: 650px;
+}
+
+div {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
 }
 
-form {
+form{
   background-color: white;
   padding: 2rem 2.5rem;
   border-radius: 1rem;
@@ -62,7 +65,7 @@ textarea:focus {
   box-shadow: 0 0 0 3px rgba(116, 172, 223, 0.2);
 }
 
-button {
+button, a {
   background-color: #74ACDF;
   color: white;
   border: none;
@@ -74,6 +77,16 @@ button {
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+.btn-index{
+  display: flex;
+  justify-content: center;
+  width: 20%;
+}
+
+a{
+  margin-top: 5px;
 }
 
 button:hover {
@@ -97,7 +110,6 @@ input[type="submit"]:hover {
   background-color: #5a98c4;
 }
 
-
 </style>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,22 +120,26 @@ input[type="submit"]:hover {
     <title>Document</title>
 </head>
 <body>
-    <form method='post' style='display:flex; flex-direction:column; gap:10px; align-items:center;''>
-        <label name='titulo'>titulo</label>
-        <input type='text' name='titulo'>
-        <label name='descripcion'>descripcion</label>
-        <textarea name="descripcion"></textarea>
-        <label name='zona'>zona</label>
-        <input type='text' name='zona'>
-        <label name='id_especialidad'>especialidad</label>
-        <select name="id_especialidad">
-        <option value='1'>seleciona</option>
-        <option value='2'>electricidad</option>
-        <option value='3'>fontaneria</option>
-        <option value='4'>plomeria</option>
-        </select>
-        <button type='submit' name="nuevo" value="nuevo">Enviar</button>
-      </form>
-      <button><a href="index.php" class="btn-index">Volver a inicio</a></button>
+    <div>
+      <form method='post' style='display:flex; flex-direction:column; gap:10px; align-items:center;''>
+          <label name='titulo'>titulo</label>
+          <input type='text' name='titulo'>
+          <label name='descripcion'>descripcion</label>
+          <textarea name="descripcion"></textarea>
+          <label name='zona'>zona</label>
+          <input type='text' name='zona'>
+          <label name='id_especialidad'>especialidad</label>
+          <select name="id_especialidad">
+          <option value='1'>seleciona</option>
+          <option value='2'>electricidad</option>
+          <option value='3'>fontaneria</option>
+          <option value='4'>plomeria</option>
+          </select>
+          <button type='submit' name="nuevo" value="nuevo">Enviar</button>
+        </form>
+    </div>
+    <div>
+      <button class="btn-index"><a href="index.php">Volver a inicio</a></button>
+    </div>
 </body>
 </html>
