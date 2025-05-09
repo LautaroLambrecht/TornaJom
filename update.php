@@ -16,13 +16,16 @@ body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 2rem;
+  height: 650px;
+}
+
+div {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
 }
 
-form {
+form{
   background-color: white;
   padding: 2rem 2.5rem;
   border-radius: 1rem;
@@ -65,7 +68,7 @@ textarea:focus {
   box-shadow: 0 0 0 3px rgba(116, 172, 223, 0.2);
 }
 
-button {
+button, a {
   background-color: #74ACDF;
   color: white;
   border: none;
@@ -77,6 +80,16 @@ button {
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+.btn-index{
+  display: flex;
+  justify-content: center;
+  width: 20%;
+}
+
+a{
+  margin-top: 5px;
 }
 
 button:hover {
@@ -100,6 +113,7 @@ input[type="submit"]:hover {
   background-color: #5a98c4;
 }
 
+</style>
 
 </style>
 <!DOCTYPE html>
@@ -112,21 +126,36 @@ input[type="submit"]:hover {
     <title>Document</title>
 </head>
 <body>
-<form method="post">
-    <input type="hidden" name="id" value="<?php echo $_POST['id'];?>">
-    <label for="titulo">Titulo</label>
-    <input type="text" name="titulo" value="<?php echo $_POST['titulo'];?>">
-    <label for="descripcion">Descripción</label>
-    <input type="text" name="descripcion" value="<?php echo $_POST['descripcion'];?>">
-    <label for="estado">Estado</label>
-    <input type="text" name="estado" value="<?php echo $_POST['estado'];?>">
-    <label for="zona">Zona</label>
-    <input type="text" name="zona" value="<?php echo $_POST['zona'];?>">
-    <label for="id_especialidad">Especialidad</label>
-    <input type="text" name="id_especialidad" value="<?php echo $_POST['id_especialidad'];?>">
-    <input type="submit" name="modificar" value="modificar">
-    <button><a href="index.php" class="btn-index">Index</a></button>
-
-</form>
+  <div>
+    <form method="post" style='display:flex; flex-direction:column; gap:10px; align-items:center;'>
+      <input type="hidden" name="id" value="<?php echo $_POST['id'];?>">
+      <label for="titulo">Titulo</label>
+      <input type="text" name="titulo" value="<?php echo $_POST['titulo'];?>">
+      <label for="descripcion">Descripción</label>
+      <input type="text" name="descripcion" value="<?php echo $_POST['descripcion'];?>">
+      <label for="estado">Estado</label>
+      <select name="estado">
+          <option disabled selected>seleciona</option>
+          <option value='pendiente'>pendiente</option>
+          <option value='reclamado'>reclamado</option>
+          <option value='completado'>completado</option>
+          </select>
+      <label for="zona">Zona</label>
+      <input type="text" name="zona" value="<?php echo $_POST['zona'];?>">
+      <label for="id_especialidad">Especialidad</label>
+      <select name="id_especialidad">
+            <option disabled selected>selecciona</option>
+            <option value='1'>pintura</option>
+            <option value='2'>electricidad</option>
+            <option value='3'>fontaneria</option>
+            <option value='4'>jardineria</option>
+        </select>
+      <input type="submit" name="modificar" value="modificar">
+  </form>
+  </div>
+  
+  <div>
+    <button class="btn-index"><a href="index.php">Volver a inicio</a></button>
+  </div>
 </body>
 </html>

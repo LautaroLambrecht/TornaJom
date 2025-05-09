@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?php
 
                     if ($usuario_id === null ){
-                        echo "<h2>Hola, <a href='registrarse.php'>registrate</a> o <a href='login.php'>inicia sesion</a>!</h2>";
+                        echo "<p>Hola, <a href='registrarse.php'>registrate</a> o <a href='login.php'>inicia sesion</a>!</p>";
                     }
                     else{
                         echo "<p>Hola, ".$modelo->getUsuarioID($usuario_id)."</p>";
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     if ($usuario_id !== null){
                         echo "
-                            <a href=''><p>Ver mi perfil</p></a>
+                            <a href='profile.php'><p>Ver mi perfil</p></a>
                             <a href='createWorks.php'><p>Crear Trabajo</p></a>
                             <a href=''><p>Mis trabajos publicados</p></a>
                             <a href=''><p>Mis trabajos pendientes</p></a>

@@ -21,11 +21,11 @@ CREATE TABLE tipodetrabajo (
 
 CREATE TABLE trabajo (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    estado ENUM('pendiente', 'completado') DEFAULT 'pendiente',
+    estado ENUM('pendiente', 'completado', 'reclamado') DEFAULT 'pendiente',
     titulo VARCHAR(255) NOT NULL,
     descripcion TEXT,
     id_publicacion INT,
-    id_realizacion INT,
+    id_realizacion INT NULL,
     zona VARCHAR(100),
     id_especialidad INT,
     FOREIGN KEY (id_especialidad) REFERENCES tipodetrabajo(id),

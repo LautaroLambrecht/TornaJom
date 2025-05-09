@@ -1,4 +1,10 @@
 <?php
+
+    session_start();
+
+    require_once "require_login.php";
+    require_login();
+
     require "autoloader.php";
     $modelo = new Model();
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -121,7 +127,7 @@ input[type="submit"]:hover {
 </head>
 <body>
     <div>
-      <form method='post' style='display:flex; flex-direction:column; gap:10px; align-items:center;''>
+      <form method='post' style='display:flex; flex-direction:column; gap:10px; align-items:center;'>
           <label name='titulo'>titulo</label>
           <input type='text' name='titulo'>
           <label name='descripcion'>descripcion</label>
@@ -130,10 +136,11 @@ input[type="submit"]:hover {
           <input type='text' name='zona'>
           <label name='id_especialidad'>especialidad</label>
           <select name="id_especialidad">
-          <option value='1'>seleciona</option>
-          <option value='2'>electricidad</option>
-          <option value='3'>fontaneria</option>
-          <option value='4'>plomeria</option>
+            <option disabled selected'>selecciona</option>
+            <option value='1'>pintura</option>
+            <option value='2'>electricidad</option>
+            <option value='3'>fontaneria</option>
+            <option value='4'>jardineria</option>
           </select>
           <button type='submit' name="nuevo" value="nuevo">Enviar</button>
         </form>

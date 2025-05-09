@@ -1,13 +1,30 @@
 <?php
-require 'autoloader.php'; 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
-    $id = $_POST['id'];
-    $nuevoEstado = 'completado';
+    session_start();
 
-    $obj = new model(); 
-    $obj->updateEstado($id, $nuevoEstado);
-}
+    require_once "require_login.php";
+    require_login();
 
-header("Location: index.php"); 
-exit();
+    $usuario_id = $_SESSION['usuario_id'];
+
+    require 'autoloader.php'; 
+
+    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $nuevoEstado = $_GET['estado'];
+
+        $obj = new model(); 
+
+        if ($nuevoEstado == 'pendiente'){
+            $id_realizacion = null;
+            $obj->updateEstado($id, $nuevoEstado, $id_realizacion);
+        }
+
+        if ($nuevoEstado == 'reclamado' || $nuevoEstado == 'completado'){
+            $id_realizacion = $_GET['id_realizacion'];
+            $obj->updateEstado($id, $nuevoEstado, $id_realizacion);
+        }
+    }
+
+    header("Location: profile.php"); 
+    exit();
