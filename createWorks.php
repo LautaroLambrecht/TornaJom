@@ -20,7 +20,7 @@ body {
   margin: 0;
   padding: 2rem;
   height: 650px;
-}
+}$sql = "SELECT * FROM trabajo where id_publicacion = $id AND (estado = 'pendiente' OR estado = 'reclamado')";
 
 div {
   display: flex;
@@ -126,7 +126,7 @@ input[type="submit"]:hover {
     <title>Document</title>
 </head>
 <body>
-    <div>
+    <div style='display:flex; justify-content:center;'>
       <form method='post' style='display:flex; flex-direction:column; gap:10px; align-items:center;'>
           <label name='titulo'>titulo</label>
           <input type='text' name='titulo'>
@@ -145,7 +145,7 @@ input[type="submit"]:hover {
           <button type='submit' name="nuevo" value="nuevo">Enviar</button>
         </form>
     </div>
-    <div>
+    <div style='display:flex; justify-content:center;'>
       <button class="btn-index"><a href="index.php">Volver a inicio</a></button>
     </div>
 </body>

@@ -36,7 +36,7 @@
                 <?php
 
                     if ($usuario_id === null ){
-                        echo "<h2>Hola, <a href='registrarse.php'>registrate</a> o <a href='login.php'>inicia sesion</a>!</h2>";
+                        echo "<p>Hola, <a href='registrarse.php'>registrate</a> o <a href='login.php'>inicia sesion</a>!</p>";
                     }
                     else{
                         echo "<p>Hola, ".$modelo->getUsuarioID($usuario_id)."</p>";
@@ -53,6 +53,8 @@
                         echo "
                             <a href='profile.php'><p>Ver mi perfil</p></a>
                             <a href='createWorks.php'><p>Crear Trabajo</p></a>
+                            <a href='trabajosPublicados.php'><p>Trabajos Publicados</p></a>
+                            <a href='trabajosPendientes.php'><p>Tus trabajos pendientes</p></a>
                             <a style='position:absolute; bottom:0;' href='cerrarsesion.php'><p>Cerrar sesion</p></a>";
                     }
             

@@ -99,14 +99,17 @@
                         echo "
                             <a href='profile.php'><p>Ver mi perfil</p></a>
                             <a href='createWorks.php'><p>Crear Trabajo</p></a>
+                            <a href='trabajosPublicados.php'><p>Trabajos Publicados</p></a>
+                            <a href='trabajosPendientes.php'><p>Tus trabajos pendientes</p></a>
                             <a style='position:absolute; bottom:0;' href='cerrarsesion.php'><p>Cerrar sesion</p></a>";
                     }
             
             ?>
         </div>
         </div>
+        </div>
     </header>
-
+    
       <?php
       
           if(isset($_GET['id'])){

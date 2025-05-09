@@ -173,9 +173,12 @@
             $id = (int)$id;
             if ($id_realizacion === null && $estado == 'pendiente') {
                 $sql = "UPDATE trabajo SET estado = '$estado', id_realizacion = NULL WHERE id = $id";
+                $this->conn->query($sql);
             } 
+            
             if  ($id_realizacion === null && $estado == 'completado'){
                 $sql = "UPDATE trabajo SET estado = '$estado' WHERE id = $id";
+                $this->conn->query($sql);
             }
 
             if (!empty($id_realizacion) && $estado == 'reclamado')
@@ -294,7 +297,7 @@
         }
 
         public function getClaimedWork($id){
-            $sql = "SELECT * FROM trabajo where id_realizacion = $id";
+            $sql = "SELECT * FROM trabajo where id_realizacion = $id AND (estado = 'pendiente' OR estado = 'reclamado')";
             $stmt = $this->conn->query($sql);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
